@@ -83,7 +83,6 @@
             margin: 0 auto;
             padding: 0 16px;
             width: 100%;
-            /* main 不要设置flex！！！ */
         }
         /* =========页面切换动画========= */
         .page {
@@ -159,7 +158,7 @@
         }
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 30px 0;
             opacity: 0.7;
             font-size:14px;
         }
@@ -238,8 +237,8 @@
     </div>
 </main>
 
+<!-- 底部版权文字已经全部清空，不会再显示©2026那一行 -->
 <footer>
-    <span data-i18n="copyright">© 2026 个人主页</span>
 </footer>
 
 <script>
@@ -302,8 +301,7 @@ const i18nData = {
         homeIntro: "你可以在这里填写个人简介。比如：喜欢制作网页、热爱创作，持续分享自己开发的各类小项目。前往【我的作品】页面查看所有项目。点击卡片即可打开对应的作品网站。",
         worksTitle: "我的作品",
         work1Name: "多语言演示网站",
-        work1Desc: "支持浅色深色切换、多国语言，自动记忆用户偏好的静态网页。",
-        copyright: "© 2026 个人主页"
+        work1Desc: "支持浅色深色切换、多国语言，自动记忆用户偏好的静态网页。"
     },
     "zh-TW": {
         title: "個人部落格首頁",
@@ -314,8 +312,7 @@ const i18nData = {
         homeIntro: "你可以在此填寫自我介紹。例如：喜愛製作網頁、熱愛創作，持續分享開發的各式專案。前往【我的作品】瀏覽所有項目，點擊卡片即可開啟作品網站。",
         worksTitle: "我的作品",
         work1Name: "多語言示範網站",
-        work1Desc: "支援淺色深色主題、多國語言，自動記住使用者偏好的靜態網頁。",
-        copyright: "© 2026 個人首頁"
+        work1Desc: "支援淺色深色主題、多國語言，自動記住使用者偏好的靜態網頁。"
     },
     "en": {
         title: "Personal Blog Homepage",
@@ -326,8 +323,7 @@ const i18nData = {
         homeIntro: "You can write your introduction here. I like building websites and creating projects. Visit My Works to view all projects. Click the card to open each work.",
         worksTitle: "My Works",
         work1Name: "Multilingual Demo Website",
-        work1Desc: "Light & dark mode, multiple languages, remembers user preferences automatically.",
-        copyright: "© 2026 Personal Homepage"
+        work1Desc: "Light & dark mode, multiple languages, remembers user preferences automatically."
     },
     "ja": {
         title: "個人ブログホームページ",
@@ -338,8 +334,7 @@ const i18nData = {
         homeIntro: "ここに自己紹介を記載できます。ウェブサイト制作や創作が好きで、自作プロジェクトを公開しています。「作品一覧」から各作品を確認でき、カードをクリックすると開きます。",
         worksTitle: "作品一覧",
         work1Name: "多言語デモサイト",
-        work1Desc: "ライト/ダークテーマ切り替え、多言語対応、設定を自動保存する静的サイト。",
-        copyright: "© 2026 個人ホームページ"
+        work1Desc: "ライト/ダークテーマ切り替え、多言語対応、設定を自動保存する静的サイト。"
     },
     "ko": {
         title: "개인 블로그 메인페이지",
@@ -350,8 +345,7 @@ const i18nData = {
         homeIntro: "자기소개를 적을 수 있습니다. 웹사이트 제작과 창작을 좋아하며 직접 만든 프로젝트를 공유합니다. 작품 페이지에서 카드를 클릭하면 해당 사이트로 이동합니다.",
         worksTitle: "내 작품",
         work1Name: "다국어 데모 웹사이트",
-        work1Desc: "밝은/어두운 테마, 다국어 지원, 사용자 설정을 자동으로 기억하는 정적 웹사이트입니다.",
-        copyright: "© 2026 개인 홈페이지"
+        work1Desc: "밝은/어두운 테마, 다국어 지원, 사용자 설정을 자동으로 기억하는 정적 웹사이트입니다."
     },
     "fr": {
         title: "Page d'accueil personnel",
@@ -362,8 +356,7 @@ const i18nData = {
         homeIntro: "Vous pouvez écrire votre présentation ici. J'aime créer des sites web et des projets. Allez sur Mes créations, cliquez sur une carte pour ouvrir le projet.",
         worksTitle: "Mes créations",
         work1Name: "Site multilingue de démonstration",
-        work1Desc: "Mode clair/sombre, plusieurs langues, mémorise automatiquement les préférences.",
-        copyright: "© 2026 Page personnelle"
+        work1Desc: "Mode clair/sombre, plusieurs langues, mémorise automatiquement les préférences."
     },
     "de": {
         title: "Persönliche Startseite",
@@ -374,8 +367,7 @@ const i18nData = {
         homeIntro: "Hier kannst du deine Vorstellung schreiben. Ich mag Webentwicklung und eigene Projekte. Gehe zu Meine Werke und klicke auf eine Karte zum Öffnen.",
         worksTitle: "Meine Werke",
         work1Name: "Mehrsprachige Demo‑Webseite",
-        work1Desc: "Hell/Dunkelmodus, mehrere Sprachen, speichert Benutzereinstellungen automatisch.",
-        copyright: "© 2026 Persönliche Seite"
+        work1Desc: "Hell/Dunkelmodus, mehrere Sprachen, speichert Benutzereinstellungen automatisch."
     },
     "es": {
         title: "Página personal",
@@ -386,8 +378,7 @@ const i18nData = {
         homeIntro: "Puedes escribir tu biografía aquí. Me gusta crear páginas web y proyectos. Ve a Mis proyectos y pulsa la tarjeta para abrir cada trabajo.",
         worksTitle: "Mis proyectos",
         work1Name: "Sitio multilingüe de demostración",
-        work1Desc: "Modo claro y oscuro, varios idiomas, guarda preferencias automáticamente.",
-        copyright: "© 2026 Página personal"
+        work1Desc: "Modo claro y oscuro, varios idiomas, guarda preferencias automáticamente."
     },
     "ru": {
         title: "Личная главная страница",
@@ -398,8 +389,7 @@ const i18nData = {
         homeIntro: "Здесь можно оставить описание о себе. Я люблю создавать веб‑сайты и проекты. Перейдите в Мои работы, нажмите карточку для открытия проекта.",
         worksTitle: "Мои работы",
         work1Name: "Многоязычный демонстрационный сайт",
-        work1Desc: "Светлый/тёмный режим, много языков, автоматически сохраняет настройки.",
-        copyright: "© 2026 Личная страница"
+        work1Desc: "Светлый/тёмный режим, много языков, автоматически сохраняет настройки."
     }
 };
 
