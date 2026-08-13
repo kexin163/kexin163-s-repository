@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -32,6 +31,9 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         header {
             background: var(--nav-bg);
@@ -75,17 +77,47 @@
             cursor: pointer;
             font-size: 14px;
         }
-        /* 主体容器 */
         main {
+            flex-grow: 1;
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 0 16px;
+            width: 100%;
+            /* main 不要设置flex！！！ */
         }
+        /* =========页面切换动画========= */
         .page {
             display: none;
+            opacity: 0;
+            transform: translateY(16px);
         }
         .page.active {
             display: block;
+            animation: pageFadeIn 0.45s ease forwards;
+        }
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+        /* ======只有首页单独开启flex居中，其他页面不受影响====== */
+        #page-home.active {
+            min-height: calc(100vh - 64px - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        /* =====作品页面：正常从上往下排列，标题在最顶部，文字居中===== */
+        #page-works h1 {
+            text-align: center;
+            margin-top: 0;
+            padding-top: 16px;
         }
         h1 {
             margin-bottom: 20px;
@@ -96,6 +128,7 @@
             line-height: 1.8;
             max-width: 750px;
             opacity: 0.9;
+            margin:0 auto;
         }
         /* 作品卡片网格 */
         .works-grid {
@@ -127,7 +160,6 @@
         footer {
             text-align: center;
             padding: 30px;
-            margin-top: 80px;
             opacity: 0.7;
             font-size:14px;
         }
@@ -140,8 +172,21 @@
             .nav-menu {
                 margin: 8px 0;
             }
+            .nav-menu a {
+                margin: 0 6px;
+                font-size: 14px;
+            }
             .works-grid {
                 grid-template-columns: 1fr;
+            }
+            #page-home.active {
+                min-height: auto;
+                padding-top:60px;
+                padding-bottom:60px;
+                text-align:center;
+            }
+            #page-works h1 {
+                padding-top:12px;
             }
         }
     </style>
@@ -155,7 +200,6 @@
             <a onclick="switchPage('works')" data-i18n="navWorks">我的作品</a>
         </nav>
         <div class="toolbar">
-            <!-- 语言选择器全程展示，首页和作品页面都存在 -->
             <select class="lang-select" id="languageSelect">
                 <option value="zh-CN">简体中文</option>
                 <option value="zh-TW">繁體中文</option>
@@ -173,7 +217,7 @@
 </header>
 
 <main>
-    <!-- 首页 -->
+    <!-- 首页：屏幕垂直居中，文字水平居中 -->
     <div id="page-home" class="page active">
         <h1 data-i18n="homeTitle">欢迎来到我的主页</h1>
         <p class="intro-text" data-i18n="homeIntro">
@@ -182,22 +226,14 @@
         </p>
     </div>
 
-    <!-- 我的作品页面 -->
+    <!-- 我的作品页面：标题在导航栏下方页面顶部，文字水平居中 -->
     <div id="page-works" class="page">
         <h1 data-i18n="worksTitle">我的作品</h1>
         <div class="works-grid">
-            <!-- 点击卡片跳转 demo.html（之前的多语言网页） -->
             <div class="work-card" onclick="openWork('demo.html')">
                 <h3 data-i18n="work1Name">多语言演示网站</h3>
                 <p data-i18n="work1Desc">支持浅色深色切换、多国语言，自动记忆用户偏好的静态网页。</p>
             </div>
-            <!--
-            新增作品模板，直接复制粘贴：
-            <div class="work-card" onclick="openWork('文件名.html')">
-                <h3 data-i18n="work2Name">作品名称</h3>
-                <p data-i18n="work2Desc">作品简介</p>
-            </div>
-            -->
         </div>
     </div>
 </main>
@@ -236,11 +272,24 @@ themeBtn.addEventListener('click', () => {
 function switchPage(pageName) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + pageName).classList.add('active');
+    window.location.hash = pageName;
 }
 // 在新标签页打开作品
 function openWork(url) {
     window.open(url, '_blank');
 }
+
+// ==========根据url#hash自动切换页面==========
+function checkHashPage(){
+    const hash = window.location.hash.replace('#','');
+    if(hash === 'works'){
+        switchPage('works');
+    }else{
+        switchPage('home');
+    }
+}
+window.addEventListener('hashchange',checkHashPage);
+checkHashPage();
 
 // ========== 多语言包 ==========
 const i18nData = {
@@ -324,7 +373,7 @@ const i18nData = {
         homeTitle: "Willkommen auf meiner Seite",
         homeIntro: "Hier kannst du deine Vorstellung schreiben. Ich mag Webentwicklung und eigene Projekte. Gehe zu Meine Werke und klicke auf eine Karte zum Öffnen.",
         worksTitle: "Meine Werke",
-        work1Name: "Mehrsprachige Demo-Webseite",
+        work1Name: "Mehrsprachige Demo‑Webseite",
         work1Desc: "Hell/Dunkelmodus, mehrere Sprachen, speichert Benutzereinstellungen automatisch.",
         copyright: "© 2026 Persönliche Seite"
     },
@@ -346,7 +395,7 @@ const i18nData = {
         navHome: "Главная",
         navWorks: "Мои работы",
         homeTitle: "Добро пожаловать",
-        homeIntro: "Здесь можно оставить описание о себе. Я люблю создавать веб-сайты и проекты. Перейдите в Мои работы, нажмите карточку для открытия проекта.",
+        homeIntro: "Здесь можно оставить описание о себе. Я люблю создавать веб‑сайты и проекты. Перейдите в Мои работы, нажмите карточку для открытия проекта.",
         worksTitle: "Мои работы",
         work1Name: "Многоязычный демонстрационный сайт",
         work1Desc: "Светлый/тёмный режим, много языков, автоматически сохраняет настройки.",
@@ -392,18 +441,6 @@ select.addEventListener('change', () => {
     localStorage.setItem('siteLang', chosen);
     setLanguage(chosen);
 });
-    // 根据url后面#xxx自动切换页面（新增这一段，放在index.html脚本最后面）
-function checkHashPage(){
-    const hash = window.location.hash.replace('#','');
-    if(hash === 'works'){
-        switchPage('works');
-    }else{
-        switchPage('home');
-    }
-}
-window.addEventListener('hashchange',checkHashPage);
-// 页面刚加载完成执行一次
-checkHashPage();
 </script>
 </body>
 </html>
