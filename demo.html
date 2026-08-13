@@ -30,6 +30,23 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background 0.3s ease, color 0.3s ease;
+            min-height:100vh;
+        }
+        /* =========页面入场滑动淡入动画（和主页一模一样）========= */
+        .wrap-content{
+            opacity:0;
+            transform: translateY(16px);
+            animation: pageFadeIn 0.45s ease forwards;
+        }
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
         }
         /* 导航栏 */
         header {
@@ -73,11 +90,12 @@
             cursor: pointer;
             font-size: 14px;
         }
-        /* 主体内容 */
+        /* 主体内容：全部文字水平居中 */
         main {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 16px;
+            margin: 0 auto;
+            padding: 32px 16px;
+            text-align:center;
         }
         h1 {
             margin-bottom: 20px;
@@ -88,6 +106,7 @@
             line-height: 1.7;
             max-width: 700px;
             opacity: 0.88;
+            margin:0 auto;
         }
         .info-box {
             background: var(--card-bg);
@@ -96,11 +115,14 @@
             box-shadow: var(--card-shadow);
             margin-top: 30px;
             transition: background 0.3s ease;
+            max-width:700px;
+            margin-left:auto;
+            margin-right:auto;
+            text-align:center;
         }
         footer {
             text-align: center;
             padding: 30px;
-            margin-top: 80px;
         }
         /* 手机端适配规则 */
         @media (max-width: 768px) {
@@ -115,6 +137,9 @@
                 margin: 0 6px;
                 font-size: 14px;
             }
+            main{
+                padding:20px 16px;
+            }
         }
     </style>
 </head>
@@ -122,7 +147,6 @@
 <header>
     <div class="nav-wrap">
         <div class="logo" data-i18n="logoName">我的网站</div>
-        <!-- 重点：我的作品链接写 index.html#works -->
         <nav class="nav-menu">
             <a href="index.html">首页</a>
             <a href="index.html#works">我的作品</a>
@@ -143,16 +167,20 @@
         </div>
     </div>
 </header>
-<main>
-    <h1 data-i18n="mainTitle">欢迎来到本站</h1>
-    <p data-i18n="mainDesc">这是一个支持多国语言切换的示例网站，你可以在右上角选择语言。页面带有导航栏，没有轮播图，布局简洁清爽。</p>
-    <div class="info-box">
-        <h3 data-i18n="boxTitle">网站介绍</h3>
-        <p data-i18n="boxText">你可以自由修改文字、颜色、页面内容。后续如果想要增加更多功能，比如留言板、图片展示都可以继续扩展。</p>
-    </div>
-</main>
-<footer>
-</footer>
+<!-- 给主体内容套一层，实现滑动淡入动画 -->
+<div class="wrap-content">
+    <main>
+        <h1 data-i18n="mainTitle">欢迎来到本站</h1>
+        <p data-i18n="mainDesc">这是一个支持多国语言切换的示例网站，你可以在右上角选择语言。页面带有导航栏，没有轮播图，布局简洁清爽。</p>
+        <div class="info-box">
+            <h3 data-i18n="boxTitle">网站介绍</h3>
+            <p data-i18n="boxText">你可以自由修改文字、颜色、页面内容。后续如果想要增加更多功能，比如留言板、图片展示都可以继续扩展。</p>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+
 <script>
 // ========== 主题切换逻辑 ==========
 const html = document.documentElement;
@@ -275,7 +303,7 @@ const i18nData = {
         boxText: "Puede modificar libremente textos, colores y contenido. Más adelante puede añadir funciones como tablero de mensajes o galería de imágenes."
     },
     "ru": {
-        title: "Многоязычный демонстрационный сайт",
+        title: "Личная главная страница",
         logoName: "Мой сайт",
         navHome: "Главная",
         navAbout: "О нас",
