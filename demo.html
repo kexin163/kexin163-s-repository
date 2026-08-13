@@ -122,11 +122,10 @@
 <header>
     <div class="nav-wrap">
         <div class="logo" data-i18n="logoName">我的网站</div>
+        <!-- 修改导航：只保留首页、我的作品，点击跳回主页 index.html -->
         <nav class="nav-menu">
-            <a href="#home" data-i18n="navHome">首页</a>
-            <a href="#about" data-i18n="navAbout">关于我们</a>
-            <a href="#service" data-i18n="navService">服务</a>
-            <a href="#contact" data-i18n="navContact">联系我们</a>
+            <a href="index.html">首页</a>
+            <a href="index.html#works">我的作品</a>
         </nav>
         <div class="toolbar">
             <select class="lang-select" id="languageSelect">
@@ -144,27 +143,21 @@
         </div>
     </div>
 </header>
-
 <main>
     <h1 data-i18n="mainTitle">欢迎来到本站</h1>
     <p data-i18n="mainDesc">这是一个支持多国语言切换的示例网站，你可以在右上角选择语言。页面带有导航栏，没有轮播图，布局简洁清爽。</p>
-
     <div class="info-box">
         <h3 data-i18n="boxTitle">网站介绍</h3>
         <p data-i18n="boxText">你可以自由修改文字、颜色、页面内容。后续如果想要增加更多功能，比如留言板、图片展示都可以继续扩展。</p>
     </div>
 </main>
-
 <footer>
-
 </footer>
-
 <script>
 // ========== 主题切换逻辑 ==========
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('siteTheme');
-
 if (savedTheme) {
     html.setAttribute('data-theme', savedTheme);
 } else {
@@ -173,7 +166,6 @@ if (savedTheme) {
         localStorage.setItem('siteTheme', 'dark');
     }
 }
-
 themeBtn.addEventListener('click', () => {
     const now = html.getAttribute('data-theme');
     if (now === 'dark') {
@@ -184,7 +176,6 @@ themeBtn.addEventListener('click', () => {
         localStorage.setItem('siteTheme', 'dark');
     }
 });
-
 // ========== 多语言包 ==========
 const i18nData = {
     "zh-CN": {
@@ -296,11 +287,9 @@ const i18nData = {
         boxText: "Вы можете свободно изменять текст, цвета и содержание страницы. Позже можно добавить гостевую книгу, галерею изображений и другие функции."
     }
 };
-
 // 支持的语言列表
 const supportedLangs = ["zh-CN","zh-TW","en","ja","ko","fr","de","es","ru"];
 const select = document.getElementById('languageSelect');
-
 // 更新页面语言
 function setLanguage(lang) {
     if (!supportedLangs.includes(lang)) lang = "zh-CN";
@@ -312,7 +301,6 @@ function setLanguage(lang) {
         el.textContent = data[key];
     });
 }
-
 // 获取浏览器系统语言
 function getBrowserLang() {
     const raw = navigator.language || navigator.userLanguage;
@@ -321,7 +309,6 @@ function getBrowserLang() {
     if(raw.startsWith("zh")) return "zh-CN";
     return "en";
 }
-
 // 初始化语言逻辑
 let initLang;
 const savedLang = localStorage.getItem('siteLang');
@@ -331,7 +318,6 @@ if(savedLang && supportedLangs.includes(savedLang)){
     initLang = getBrowserLang();
 }
 setLanguage(initLang);
-
 // 手动切换语言时保存记录
 select.addEventListener('change', () => {
     const chosen = select.value;
