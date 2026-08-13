@@ -392,6 +392,18 @@ select.addEventListener('change', () => {
     localStorage.setItem('siteLang', chosen);
     setLanguage(chosen);
 });
+    // 根据url后面#xxx自动切换页面（新增这一段，放在index.html脚本最后面）
+function checkHashPage(){
+    const hash = window.location.hash.replace('#','');
+    if(hash === 'works'){
+        switchPage('works');
+    }else{
+        switchPage('home');
+    }
+}
+window.addEventListener('hashchange',checkHashPage);
+// 页面刚加载完成执行一次
+checkHashPage();
 </script>
 </body>
 </html>
